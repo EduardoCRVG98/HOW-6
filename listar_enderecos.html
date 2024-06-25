@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listar Endereços</title>
+</head>
+<body>
+    <h1>Listar Endereços</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Rua</th>
+                <th>Número</th>
+                <th>Cidade</th>
+                <th>ID do Cliente</th>
+            </tr>
+        </thead>
+        <tbody id="enderecosTable">
+        </tbody>
+    </table>
+    <script>
+        fetch('http://localhost:3000/enderecos')
+        .then(response => response.json())
+        .then(data => {
+            const table = document.getElementById('enderecosTable');
+            data.forEach(endereco => {
+                const row = table.insertRow();
+                row.insertCell(0).innerHTML = endereco.id;
+                row.insertCell(1).innerHTML = endereco.rua;
+                row.insertCell(2).innerHTML = endereco.numero;
+                row.insertCell(3).innerHTML = endereco.cidade;
+                row.insertCell(4).innerHTML = endereco.cliente_id;
+            });
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+    </script>
+</body>
+</html>
