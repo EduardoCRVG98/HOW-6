@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listar Clientes</title>
+</head>
+<body>
+    <h1>Listar Clientes</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Telefone</th>
+            </tr>
+        </thead>
+        <tbody id="clientesTable">
+        </tbody>
+    </table>
+    <script>
+        fetch('http://localhost:3000/clientes')
+        .then(response => response.json())
+        .then(data => {
+            const table = document.getElementById('clientesTable');
+            data.forEach(cliente => {
+                const row = table.insertRow();
+                row.insertCell(0).innerHTML = cliente.id;
+                row.insertCell(1).innerHTML = cliente.nome;
+                row.insertCell(2).innerHTML = cliente.email;
+                row.insertCell(3).innerHTML = cliente.telefone;
+            });
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+    </script>
+</body>
+</html>
